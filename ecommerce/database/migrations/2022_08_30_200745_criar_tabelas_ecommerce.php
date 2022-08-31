@@ -59,12 +59,12 @@ return new class extends Migration
         });
 
         Schema::create('notasFiscais', function (Blueprint $table){
-          $table->id();
-          $table->timestamps();
-          $table->bigInteger('venda_id')->unsigned();
-          $table->foreign('venda_id')->references('id')->on('vendas')->onDelete('cascade');
-          $table->double('valor', 12, 2);
-          $table->double('imposto', 12, 2);
+            $table->id();
+            $table->timestamps();
+            $table->bigInteger('venda_id')->unsigned();
+            $table->foreign('venda_id')->references('id')->on('vendas')->onDelete('cascade');
+            $table->double('valor', 12, 2);
+            $table->double('imposto', 12, 2);
         });
     }
 
