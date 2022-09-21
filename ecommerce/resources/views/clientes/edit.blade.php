@@ -29,7 +29,6 @@
 
 @endif
 
-
 {!! Form::model($cliente, ['method' => 'PATCH','route' => ['clientes.update', $cliente->id]]) !!}
 
 <div class="row">

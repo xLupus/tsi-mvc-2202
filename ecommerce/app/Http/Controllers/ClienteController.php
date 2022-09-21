@@ -40,13 +40,15 @@ class ClienteController extends Controller
      */
     public function store(Request $request)
     {
-        $this->validade($request, ['nome'  => 'required',
+        $this->validate($request, ['nome'  => 'required',
                                    'email' => 'required|email']);
 
         $input = $request->all();
-        $cliente = Clientes::create([$input]);
 
-        return redirect()->route('clientes.index')->with('sucess','Cliente cadastrado com sucesso');
+        $cliente = Clientes::create($input);
+
+
+        return redirect()->route('clientes.index')->with('success','Cliente cadastrado com sucesso');
 
     }
 
@@ -85,7 +87,7 @@ class ClienteController extends Controller
      */
     public function update(Request $request, $id)
     {
-        $this->validade($request, ['nome'  => 'required',
+        $this->validate($request, ['nome'  => 'required',
                                    'email' => 'required|email']);
 
         $cliente = Clientes::find($id);
@@ -94,7 +96,7 @@ class ClienteController extends Controller
 
         $cliente->update($input);
 
-        return redirect()->route('clientes.index')->with('sucess','Cliente atualizado com sucesso');
+        return redirect()->route('clientes.index')->with('success','Cliente atualizado com sucesso');
 
     }
 

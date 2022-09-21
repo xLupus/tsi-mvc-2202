@@ -9,7 +9,7 @@
         </div>
 
         <div class="pull-right">
-            <a class="btn btn-primary" href="{{ route('clients.index') }}"> Voltar</a>
+            <a class="btn btn-primary" href="{{ route('clientes.index') }}"> Voltar</a>
         </div>
     </div>
 </div>
@@ -31,15 +31,14 @@
 
 @endif
 
-{!! Form::open(array('route' => 'clients.store','method'=>'POST')) !!}
+{!! Form::open(array('route' => 'clientes.store','method'=>'POST')) !!}
 
 <div class="row">
+
     <div class="col-xs-12 col-sm-12 col-md-12">
         <div class="form-group">
             <strong>Nome:</strong>
-
             {!! Form::text('nome', null, array('placeholder' => 'Nome','class' => 'form-control')) !!}
-
         </div>
     </div>
 
