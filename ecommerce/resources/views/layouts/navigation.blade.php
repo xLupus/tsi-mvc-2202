@@ -27,6 +27,14 @@
                     <x-nav-link :href="route('produtos.index')" :active="request()->routeIs('produtos')">
                         {{ __('Produtos') }}
                     </x-nav-link>
+
+                    <x-nav-link :href="route('users.index')" :active="request()->routeIs('users')">
+                        {{ __('Usuarios') }}
+                    </x-nav-link>
+
+                    <x-nav-link :href="route('role.index')" :active="request()->routeIs('role')">
+                        {{ __('Perfis') }}
+                    </x-nav-link>
                 </div>
             </div>
 
