@@ -22,10 +22,10 @@ Route::resource('/vendedores', App\Http\Controllers\VendedoresController::class)
 Route::resource('/produtos', App\Http\Controllers\ProdutoController::class)->middleware(['auth']);
 */
 
-Route::group(['middleware' => ['auth']], function() {
+Route::group( ['middleware' => ['auth'] ], function() {
     Route::resource('/clientes', App\Http\Controllers\ClienteController::class);
     Route::resource('/vendedores', App\Http\Controllers\VendedoresController::class);
     Route::resource('/produtos', App\Http\Controllers\ProdutoController::class);
     Route::resource('/users', App\Http\Controllers\UserController::class);
-    Route::resource('/role', App\Http\Controllers\RoleController::class);
+    Route::resource('/roles', App\Http\Controllers\RoleController::class);
 });

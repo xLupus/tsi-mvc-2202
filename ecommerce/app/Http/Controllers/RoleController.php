@@ -48,7 +48,7 @@ class RoleController extends Controller
      */
     public function create()
     {
-        $permission = Permission->get();
+        $permission = Permission::get();
 
         return view('roles.create', compact('permission'));
     }
@@ -62,10 +62,10 @@ class RoleController extends Controller
     public function store(Request $request)
     {
         $this->validate($request, ['name'       => 'required|unique:roles,name',
-                                   'permission' => 'required']);
+                                   'permissions' => 'required']);
 
         $role = Role::create([ 'name' => $request->input('name') ]);
-        $role->syncPermissions($request->input('permission'));
+        $role->syncPermissions($request->input('permissions'));
 
         return redirect()->route('roles.index')->with('success', 'Perfil criado com sucesso');
     }
@@ -100,11 +100,12 @@ class RoleController extends Controller
     {
         $role = Role::find($id);
 
-        $Permissions = Permission::get();
+        $permissions = Permission::get();
 
         $rolePermissions = DB::table('role_has_permissions')
                                ->where('role_has_permissions.role_id', $id)
-                               ->pluck("role_has_permissions.permission_id");
+                               ->pluck("role_has_permissions.permission_id")
+                               ->all();
 
         return view('roles.edit', compact('role','permissions', 'rolePermissions'));
     }
@@ -119,12 +120,12 @@ class RoleController extends Controller
     public function update(Request $request, $id)
     {
         $this->validate($request, ['name' => 'required',
-                                   'permission' => 'required']);
+                                   'permissions' => 'required']);
 
         $role = Role::find($id);
         $role->name = $request->input('name');
         $role->save();
-        $role->syncPermissions($Request->input('permission'));
+        $role->syncPermissions($request->input('permissions'));
 
         return redirect()->route('roles.index')->with('success', 'Perfil atualizado');
     }

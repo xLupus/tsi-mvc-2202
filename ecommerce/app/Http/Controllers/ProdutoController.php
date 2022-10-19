@@ -7,7 +7,21 @@ use App\Models\Produtos;
 
 class ProdutoController extends Controller
 {
+    public function __construct()
+    {
+        $this->middleWare('permission:produtos-list|produtos-create|produtos-edit|produtos-delete',
+                          ['only' => ['index', 'show']]);
 
+        $this->middleWare('permission:produtos-create',
+                          ['only' => ['create', 'store']]);
+
+        $this->middleWare('permission:produtos-edit',
+                          ['only' => ['edit', 'update']]);
+
+        $this->middleWare('permission:produtos-delete',
+                          ['only' => ['destroy']]);
+    }
+    
     private $qtdPorPagina = 5;
 
     /**

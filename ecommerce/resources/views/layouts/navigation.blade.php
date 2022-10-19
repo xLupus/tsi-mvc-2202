@@ -16,25 +16,39 @@
                         {{ __('Dashboard') }}
                     </x-nav-link>
 
-                    <x-nav-link :href="route('clientes.index')" :active="request()->routeIs('clientes')">
-                        {{ __('Clientes') }}
-                    </x-nav-link>
+                    @can ('clientes-list')
+                        <x-nav-link :href="route('clientes.index')" :active="request()->routeIs('clientes')">
+                            {{ __('Clientes') }}
+                        </x-nav-link>
+                    @endcan
 
-                    <x-nav-link :href="route('vendedores.index')" :active="request()->routeIs('vendedores')">
-                        {{ __('Vendedores') }}
-                    </x-nav-link>
+                    @can ('vendedores-list')
+                        <x-nav-link :href="route('vendedores.index')" :active="request()->routeIs('vendedores')">
+                            {{ __('Vendedores') }}
+                        </x-nav-link>
+                    @endcan
 
-                    <x-nav-link :href="route('produtos.index')" :active="request()->routeIs('produtos')">
-                        {{ __('Produtos') }}
-                    </x-nav-link>
 
-                    <x-nav-link :href="route('users.index')" :active="request()->routeIs('users')">
-                        {{ __('Usuarios') }}
-                    </x-nav-link>
 
-                    <x-nav-link :href="route('role.index')" :active="request()->routeIs('role')">
-                        {{ __('Perfis') }}
-                    </x-nav-link>
+                    @can ('produtos-list')
+                        <x-nav-link :href="route('produtos.index')" :active="request()->routeIs('produtos')">
+                            {{ __('Produtos') }}
+                        </x-nav-link>
+                    @endcan
+
+                    @can ('user-list')
+                        <x-nav-link :href="route('users.index')" :active="request()->routeIs('users')">
+                            {{ __('Usuarios') }}
+                        </x-nav-link>
+                    @endcan
+
+                    @can ('role-list')
+                        <x-nav-link :href="route('roles.index')" :active="request()->routeIs('role')">
+                            {{ __('Perfis') }}
+                        </x-nav-link>
+                    @endcan
+
+
                 </div>
             </div>
 

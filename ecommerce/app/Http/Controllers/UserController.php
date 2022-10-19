@@ -11,6 +11,22 @@ use Hash;
 
 class UserController extends Controller
 {
+
+    public function __construct()
+    {
+        $this->middleWare('permission:user-list|user-create|user-edit|user-delete',
+                          ['only' => ['index', 'show']]);
+
+        $this->middleWare('permission:user-create',
+                          ['only' => ['create', 'store']]);
+
+        $this->middleWare('permission:user-edit',
+                          ['only' => ['edit', 'update']]);
+
+        $this->middleWare('permission:user-delete',
+                          ['only' => ['destroy']]);
+    }
+
     /**
      * Display a listing of the resource.
      *

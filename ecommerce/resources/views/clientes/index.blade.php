@@ -9,7 +9,9 @@
         </div>
         <div class="pull-right">
 
-            <a class="btn btn-success" href="{{ route('clientes.create') }}"> + Novo cliente</a>
+            @can ('clientes-create')
+                <a class="btn btn-success" href="{{ route('clientes.create') }}"> + Novo cliente</a>
+            @endcan
 
         </div>
     </div>
@@ -45,16 +47,21 @@
     <td>{{ $cliente->telefone }}</td>
     <td>{{ $cliente->endereco }}</td>
     <td>
-       <a class="btn btn-info" href="{{ route('clientes.show',$cliente->id) }}">Mostrar</a>
+        @can ('clientes-list')
+           <a class="btn btn-info" href="{{ route('clientes.show',$cliente->id) }}">Mostrar</a>
+        @endcan
 
-        <a class="btn btn-primary" href="{{ route('clientes.edit',$cliente->id) }}">Editar</a>
+        @can ('clientes-edit')
+            <a class="btn btn-primary" href="{{ route('clientes.edit',$cliente->id) }}">Editar</a>
+        @endcan
 
-        {!! Form::open(['method' => 'DELETE','route' => ['clientes.destroy', $cliente->id],'style'=>'display:inline']) !!}
+        @can ('clientes-delete')
+            {!! Form::open(['method' => 'DELETE','route' => ['clientes.destroy', $cliente->id],'style'=>'display:inline']) !!}
 
-            {!! Form::submit('Apagar', ['class' => 'btn btn-danger']) !!}
+                {!! Form::submit('Apagar', ['class' => 'btn btn-danger']) !!}
 
-        {!! Form::close() !!}
-
+            {!! Form::close() !!}
+        @endcan
     </td>
   </tr>
 

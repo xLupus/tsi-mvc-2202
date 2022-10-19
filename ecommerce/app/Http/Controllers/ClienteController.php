@@ -7,6 +7,22 @@ use App\Models\Clientes;
 
 class ClienteController extends Controller
 {
+
+    public function __construct()
+    {
+        $this->middleWare('permission:clientes-list|clientes-create|clientes-edit|clientes-delete',
+                          ['only' => ['index', 'show']]);
+
+        $this->middleWare('permission:clientes-create',
+                          ['only' => ['create', 'store']]);
+
+        $this->middleWare('permission:clientes-edit',
+                          ['only' => ['edit', 'update']]);
+
+        $this->middleWare('permission:clientes-delete',
+                          ['only' => ['destroy']]);
+    }
+
     private $qtdPorPagina = 5;
 
     /**

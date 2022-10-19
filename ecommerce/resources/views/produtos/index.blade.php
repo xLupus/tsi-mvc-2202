@@ -9,7 +9,10 @@
         </div>
         <div class="pull-right">
 
-            <a class="btn btn-success" href="{{ route('produtos.create') }}"> + Novo produtos</a>
+            @can ('produtos-create')
+                <a class="btn btn-success" href="{{ route('produtos.create') }}"> + Novo produtos</a>
+            @endcan
+
 
         </div>
     </div>
@@ -43,15 +46,21 @@
     <td>{{ $produtos->descricao }}</td>
     <td>{{ $produtos->preco }}</td>
     <td>
-       <a class="btn btn-info" href="{{ route('produtos.show',$produtos->id) }}">Mostrar</a>
+        @can ('produtos-list')
+            <a class="btn btn-info" href="{{ route('produtos.show',$produtos->id) }}">Mostrar</a>
+        @endcan
 
-        <a class="btn btn-primary" href="{{ route('produtos.edit',$produtos->id) }}">Editar</a>
+        @can ('produtos-edit')
+            <a class="btn btn-primary" href="{{ route('produtos.edit',$produtos->id) }}">Editar</a>
+        @endcan
 
-        {!! Form::open(['method' => 'DELETE','route' => ['produtos.destroy', $produtos->id],'style'=>'display:inline']) !!}
+        @can ('produtos-delete')
+            {!! Form::open(['method' => 'DELETE','route' => ['produtos.destroy', $produtos->id],'style'=>'display:inline']) !!}
 
             {!! Form::submit('Apagar', ['class' => 'btn btn-danger']) !!}
 
-        {!! Form::close() !!}
+            {!! Form::close() !!}            
+        @endcan
 
     </td>
   </tr>

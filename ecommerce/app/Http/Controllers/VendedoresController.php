@@ -7,6 +7,22 @@ use App\Models\Vendedores;
 
 class VendedoresController extends Controller
 {
+
+    public function __construct()
+    {
+        $this->middleWare('permission:vendedores-list|vendedores-create|vendedores-edit|vendedores-delete',
+                          ['only' => ['index', 'show']]);
+
+        $this->middleWare('permission:vendedores-create',
+                          ['only' => ['create', 'store']]);
+
+        $this->middleWare('permission:vendedores-edit',
+                          ['only' => ['edit', 'update']]);
+
+        $this->middleWare('permission:vendedores-delete',
+                          ['only' => ['destroy']]);
+    }
+
     private $qtdPorPagina = 5;
 
     /**

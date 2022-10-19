@@ -8,7 +8,10 @@
             <h2>Usuários</h2>
         </div>
         <div class="pull-right">
-            <a class="btn btn-success" href="{{ route('users.create') }}"> + Novo usuário</a>
+            @can ('user-create')
+                <a class="btn btn-success" href="{{ route('users.create') }}"> + Novo usuário</a>
+
+            @endcan
         </div>
     </div>
 </div>
@@ -55,15 +58,21 @@
     </td>
 
     <td>
-       <a class="btn btn-info" href="{{ route('users.show',$user->id) }}">Mostrar</a>
-       <a class="btn btn-primary" href="{{ route('users.edit',$user->id) }}">Editar</a>
+        @can ('user-list')
+            <a class="btn btn-info" href="{{ route('users.show',$user->id) }}">Mostrar</a>
+        @endcan
 
-        {!! Form::open(['method' => 'DELETE','route' => ['users.destroy', $user->id],'style'=>'display:inline']) !!}
+        @can ('user-edit')
+            <a class="btn btn-primary" href="{{ route('users.edit',$user->id) }}">Editar</a>
+        @endcan
 
-            {!! Form::submit('Apagar', ['class' => 'btn btn-danger']) !!}
+        @can ('user-delete')
+            {!! Form::open(['method' => 'DELETE','route' => ['users.destroy', $user->id],'style'=>'display:inline']) !!}
 
-        {!! Form::close() !!}
+                {!! Form::submit('Apagar', ['class' => 'btn btn-danger']) !!}
 
+            {!! Form::close() !!}
+        @endcan
     </td>
   </tr>
 
